@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
 </head>
+<h1>Registration Form</h1>
+<form>
+  <label text="username">Username:</label>
+  <input type="text" name="Enter your Name" Placeholder="Enter your Name">
+  <br>
+  <br>
+  <label text="password"> Password:</label>
+  <input type="password" name="password" placeholder="Enter your Password">
+  <br> 
+  <br>
+<label>Gender :</label>
+<input type="radio" name="gender" value="Male">Male
+<input type="radio" name="gender" value="Female">Female
+<br>
+<br>
+<label>Subscribe:</label>
+<input type="checkbox" name="subscribe" value="yes">Subscribe to newslette
+<br>
+<br>
+<label>Message :</label>
+<textarea type="text" name="message" placeholder="Enter your Message"></textarea>
+<br>
+<br>
+<select option="city" id="City">
+  <option value="Lahore">Lahore</option>
+  <option value="Karachi">Karachi</option>
+  <option value="Islamabad">Islamabad</option>
+
+</select>
+</form>
+
 <body>
-    
+  
+
+
+
 </body>
-<script>
-let num = 0;
-let timerId = setInterval(function great(){
-    console.log(num);
-    num= num+1;
-    if (num=== 20) {
-        clearInterval(timerId);
-    }
-},100);
-
-
-
-</script>
 </html>
