@@ -3,41 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Page</title>
+    <title>Luxury Eastern Wear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
-<body>
-    <h1> Registration Form</h1>
-    <form>
-        <label for="username"> Username:</label>
-        <input type="text " name="username" placeholder="Enter your name">
-        <br> 
-        <br>
-        <label for="password"> Password:</label>
-        <input type="password" name="password" placeholder="Enter your password">
-        <br>
-        <br>
-        <label>Gender:</label>
-        <input type="radio" name="gender" value="Male">Male
-        <input type="radio" name="gender" value="Female">Female
-        <br>
-        <br>
-        <label>Subscribe:</label>
-        <input type="checkbox" name="Subscribe" value="yes">Subscribe to newslette
-        <br>
-        <br>
-        <label>Message:</label>
-        <textarea type="text" name="message" placeholder="Enter your message"></textarea>
-        <br>
-        <br>
-        <select name="city" id="City">
-            <option value="lahore">Lahore</option>
-            <option value="Karachi">Karachi</option>
-            <option value="Islamabad">Islamabad</option>
-        </select>
-        <br>
-        <br>
-        <button>Submit</button>
-      </form>
-            
+<body class="bg-white text-black">
+    <nav class="bg-gray-900 text-white p-4 flex justify-between items-center shadow-lg">
+        <h1 class="text-3xl font-bold">Luxury Eastern Wear</h1>
+        <ul class="flex space-x-6">
+            <li><a href="#" class="nav-link px-4 py-2 text-lg font-semibold hover:text-gray-400" data-target="home">Home</a></li>
+            <li><a href="#" class="nav-link px-4 py-2 text-lg font-semibold hover:text-gray-400" data-target="shop">Shop</a></li>
+            <li><a href="#" class="nav-link px-4 py-2 text-lg font-semibold hover:text-gray-400" data-target="about">About Us</a></li>
+            <li><a href="#" class="nav-link px-4 py-2 text-lg font-semibold hover:text-gray-400" data-target="contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="home" class="content p-6 text-center">
+        <h2 class="text-5xl font-extrabold text-gray-900">Elevate Your Style with Elegance</h2>
+        <p class="text-lg text-gray-700">Discover premium traditional wear with a modern touch.</p>
+        <img src="home page.jpg" alt="Fashion Image" class="mt-4 w-full rounded-lg shadow-xl">
+    </section>
+    
+    <section id="shop" class="content hidden p-6">
+        <h2 class="text-4xl font-bold text-center text-gray-900 mb-6">Shop Our Collection</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="product-list">
+            <div class="border rounded-lg shadow-lg p-4 text-center bg-gray-100 hover:shadow-xl transition">
+                <img src="https://source.unsplash.com/300x400/?kurta" alt="Product 1" class="w-full h-64 object-cover rounded-lg">
+                <h3 class="text-lg font-bold mt-2">Royal Kurta Set</h3>
+                <p class="text-gray-600">$79.99</p>
+                <button class="mt-3 bg-gray-900 text-white px-6 py-2 rounded hover:bg-gray-700 transition add-to-cart" data-name="Royal Kurta Set" data-price="79.99">Add to Cart</button>
+            </div>
+        </div>
+        <h3 class="text-2xl font-bold mt-6">Shopping Cart</h3>
+        <ul id="cart" class="bg-gray-200 p-4 rounded-lg mt-3"></ul>
+    </section>
+    
+    <section id="about" class="content hidden p-6 text-center">
+        <h2 class="text-3xl font-bold text-gray-900">About Us</h2>
+        <p class="text-lg text-gray-700 mt-4">We specialize in luxury eastern wear, blending tradition with modernity.</p>
+        <img src="https://source.unsplash.com/800x400/?textile" alt="About Us Image" class="mt-4 w-full rounded-lg shadow-xl">
+    </section>
+    
+    <section id="contact" class="content hidden p-6 text-center">
+        <h2 class="text-3xl font-bold text-gray-900">Get in Touch</h2>
+        <p class="text-lg text-gray-700">We'd love to hear from you! Reach out for inquiries.</p>
+        <form class="mt-6 max-w-lg mx-auto p-6 bg-gray-200 rounded-lg shadow-lg" id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" class="w-full p-3 border border-gray-400 rounded-md mb-3" required>
+            <input type="email" id="email" placeholder="Your Email" class="w-full p-3 border border-gray-400 rounded-md mb-3" required>
+            <textarea id="message" placeholder="Your Message" class="w-full p-3 border border-gray-400 rounded-md mb-3" required></textarea>
+            <button type="submit" class="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-700 transition">Send Message</button>
+            <p id="success-message" class="hidden text-green-600 mt-3">Message sent successfully!</p>
+        </form>
+    </section>
+    
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.content').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                document.getElementById(this.dataset.target).classList.remove('hidden');
+            });
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('success-message').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('success-message').classList.add('hidden');
+                document.getElementById('contact-form').reset();
+            }, 3000);
+        });
+
+        const cart = [];
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.dataset.name;
+                const price = this.dataset.price;
+                cart.push({ name, price });
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            const cartList = document.getElementById('cart');
+            cartList.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price}`;
+                cartList.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
